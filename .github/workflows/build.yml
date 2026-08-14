@@ -22,11 +22,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install git+https://github.com/Meekdai/Gmeek.git
+          pip install pygithub requests
 
       - name: Run Gmeek
         run: |
-          python -c "import gmeek; gmeek.run()"
+          if [ ! -f gmeek.py ]; then
+            curl -O https://raw.githubusercontent.com/Meekdai/Gmeek/main/gmeek.py
+          fi
+          python gmeek.py
 
       - name: Commit and push
         run: |

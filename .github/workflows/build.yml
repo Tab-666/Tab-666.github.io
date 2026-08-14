@@ -26,9 +26,11 @@ jobs:
 
       - name: Run Gmeek
         run: |
-          if [ ! -f gmeek.py ]; then
-            curl -O https://raw.githubusercontent.com/Meekdai/Gmeek/main/gmeek.py
-          fi
+          # 克隆 Gmeek 仓库到临时目录
+          git clone --depth 1 https://github.com/Meekdai/Gmeek.git /tmp/gmeek_repo
+          # 复制 gmeek.py 到当前目录
+          cp /tmp/gmeek_repo/gmeek.py .
+          # 执行 Gmeek
           python gmeek.py
 
       - name: Commit and push
